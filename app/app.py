@@ -89,16 +89,12 @@ def predict():
                str(row.iloc[0]['average-myrcene']), str(row.iloc[0]['average-trans-β-Farnesene']),
                str(row.iloc[0]['average-α-humulene']), str(row.iloc[0]['average-β-Caryophylene']),
                str(row.iloc[0]['average-β-pinene'])]
-    average = [s.replace(',', '.') for s in average]
-    average = [float(i) for i in average]
-    average = [average_total_oil * i * 10 for i in average]
-    print("AVERAGE: ", average)
-    predict_average = model.predict([average])
 
     return json.dumps({
         'min_predictions': predict_min.tolist(),
         'max_predictions': predict_max.tolist(),
-        'average_predictions': predict_average.tolist()
+        'average_predictions': [[(min_val + max_val) / 2 for min_val, max_val in
+                                zip(predict_min.tolist()[0], predict_max.tolist()[0])]]
     })
 
 
@@ -131,10 +127,6 @@ selectbox_option_style = """
     
     p { font-size: 16px !important; }
     
-    img {
-        float: right;
-    }
-    
     </style>
 """
 
@@ -142,16 +134,21 @@ selectbox_option_style = """
 st.markdown(selectbox_option_style, unsafe_allow_html=True)
 
 
+title_col, logo_col = st.columns([10, 1])
+
 # Logo
-images_helper.add_logo()
+with logo_col:
+    images_helper.add_logo()
 
-# Title
-st.markdown("<h1 style='text-align: center;'>Hops Predictor</h1>", unsafe_allow_html=True)
 
-# Introduction text
-st.markdown("<h5 style='text-align: center;'>"
-            "Fill out the following data fields and get a detailed forecast of your beer's aroma <br><br>"
-            "</h5>", unsafe_allow_html=True)
+with title_col:
+    # Title
+    st.markdown("<h1 style='text-align: center;'>Hops Predictor</h1>", unsafe_allow_html=True)
+
+    # Introduction text
+    st.markdown("<h5 style='text-align: center;'>"
+                "Fill out the following data fields and get a detailed forecast of your beer's aroma <br><br>"
+                "</h5>", unsafe_allow_html=True)
 
 # Text inputs
 recipe_name = st.sidebar.text_input("Recipe Name")
