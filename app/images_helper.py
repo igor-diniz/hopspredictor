@@ -3,10 +3,10 @@ import streamlit as st
 
 def add_logo():
     # Open the logo image
-    logo_image = Image.open('images/logo-1.png')
+    logo_image = Image.open('images/logo-2.jpeg')
 
     # Define the desired output size for the circular logo
-    logo_size = (70, 70)  # Adjust the size as per your preference
+    logo_size = (85, 85)  # Adjust the size as per your preference
 
     # Resize the logo with a high-quality resampling method
     logo_image = logo_image.resize(logo_size, resample=Image.LANCZOS)
