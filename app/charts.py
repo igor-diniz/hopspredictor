@@ -97,8 +97,8 @@ def draw_polygonal_chart(predictions):
             "text": "Aromas Distribution",
             "font": {"size": 24}
         },
-        height=600,  # Increase the height of the chart
-        width=600,  # Increase the width of the chart
+        height=530,  # Increase the height of the chart
+        width=530,  # Increase the width of the chart
     )
 
     # Display the chart in Streamlit

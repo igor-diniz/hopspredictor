@@ -4,6 +4,7 @@ import pickle
 import json
 import charts
 import images_helper
+import css
 
 st.set_page_config(page_title="Hops Predictor", page_icon="images/logo_hopspredictor.jpeg", layout="wide")
 
@@ -97,58 +98,18 @@ def predict():
                                 zip(predict_min.tolist()[0], predict_max.tolist()[0])]]
     })
 
-
-# Custom selectbox option styling
-selectbox_option_style = """
-    <style>
-    li {
-        background-color: #dad7cd !important;
-        color: #000000 !important;
-    }
-    
-    li:hover {
-        background-color: #52b788 !important;
-    }
-    
-    .stTextInput > div > div {
-        background-color: #52b788 !important;
-        color: #000000 !important;
-    }
-    
-    button {
-        background-color: #dad7cd !important;
-        box-shadow: none !important;
-        float: right;
-    }
-    
-    button:hover {
-        color: #52b788 !important;
-    }
-    
-    p { font-size: 16px !important; }
-    
-    </style>
-"""
-
-# Apply custom CSS
-st.markdown(selectbox_option_style, unsafe_allow_html=True)
-
-
-title_col, logo_col = st.columns([10, 1])
+css.apply_style()
 
 # Logo
-with logo_col:
-    images_helper.add_logo()
+images_helper.add_logo()
 
+# Title
+st.markdown("<h1 style='text-align: center;'>Hops Predictor</h1>", unsafe_allow_html=True)
 
-with title_col:
-    # Title
-    st.markdown("<h1 style='text-align: center;'>Hops Predictor</h1>", unsafe_allow_html=True)
-
-    # Introduction text
-    st.markdown("<h5 style='text-align: center;'>"
-                "Fill out the following data fields and get a detailed forecast of your beer's aroma <br><br>"
-                "</h5>", unsafe_allow_html=True)
+# Introduction text
+st.markdown("<h5 style='text-align: center;'>"
+            "Fill out the following data fields and get a detailed forecast of your beer's aroma <br><br>"
+            "</h5>", unsafe_allow_html=True)
 
 # Text inputs
 recipe_name = st.sidebar.text_input("Recipe Name")
