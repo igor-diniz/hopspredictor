@@ -81,16 +81,6 @@ def predict():
     print("MAXI: ", maxi)
     predict_max = model.predict([maxi])
 
-    average_total_oil = row.iloc[0]['average total oil']
-    average_total_oil = average_total_oil.replace(',', '.')
-    average_total_oil = float(average_total_oil)
-    average_total_oil = average_total_oil * amount / 100
-
-    average = [str(row.iloc[0]['average-geraniol']), str(row.iloc[0]['average-linalool']),
-               str(row.iloc[0]['average-myrcene']), str(row.iloc[0]['average-trans-β-Farnesene']),
-               str(row.iloc[0]['average-α-humulene']), str(row.iloc[0]['average-β-Caryophylene']),
-               str(row.iloc[0]['average-β-pinene'])]
-
     return json.dumps({
         'min_predictions': predict_min.tolist(),
         'max_predictions': predict_max.tolist(),
@@ -133,7 +123,7 @@ model = get_model()
 # Submit button
 if st.button("Predict Aromas Distribution"):
     # Check if any required field is empty
-    if not beer_style or not hop_variety or not hop_format or not hop_amount:
+    if beer_style == "Select" or hop_variety == "Select" or hop_format == "Select" or hop_amount == 0:
         st.error("Please fill all both beer and hops information")
     else:
         predictions = predict()

@@ -1,7 +1,7 @@
 import streamlit as st
 
-def apply_style():
 
+def apply_style():
     selectbox_option_style = """
         <style>
         li {
@@ -58,6 +58,7 @@ def apply_style():
         div.viewerBadge_link__1S137 {
             display: none;
         }
+        
         </style>
     """
 

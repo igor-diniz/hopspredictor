@@ -26,15 +26,6 @@ def draw_bar_chart(predictions):
 
     fig.add_trace(go.Bar(
         x=categories,
-        y=avg_values,
-        name='Avg',
-        text=avg_values,
-        textposition='inside',
-        marker_color='#94d2bd'
-    ))
-
-    fig.add_trace(go.Bar(
-        x=categories,
         y=max_values,
         name='Max',
         text=max_values,
